@@ -1,26 +1,39 @@
 //axios import buraya gelecek
 
-var benimIP;
+const headSelect = document.querySelector("head");
+document.createElement("script");
+const scripSelect = document.querySelector("script");
+scripSelect.setAttribute("src", "https://unpkg.com/axios/dist/axios.min.js");
+headSelect.appendChild(scripSelect);
 
+axios
+  .get("https://apis.ergineer.com/ipgeoapi/<85.106.193.174>")
+  .then((response) => {
+    // get isteği başarılı oldu
+  })
+  .catch((err) => {
+    // get isteği başarısız oldu
+  });
+
+var benimIP;
 
 // ------------ değiştirmeyin --------------
 // licensed to Ergineer 2022
 require("babel-core/register");
 require("babel-polyfill");
-async function ipAdresimiAl(){
-	await axios({
-		method: 'get',
-		url: 'https://apis.ergineer.com/ipadresim',
-	})
-	.then(function (response) {
-		return response.data
-	})
-	.then(function (a) {
-		benimIP=a
-	});
-}				
+async function ipAdresimiAl() {
+  await axios({
+    method: "get",
+    url: "https://apis.ergineer.com/ipadresim",
+  })
+    .then(function (response) {
+      return response.data;
+    })
+    .then(function (a) {
+      benimIP = a;
+    });
+}
 // ------------ değiştirmeyin --------------
-
 
 /*
 	ADIM 1: axios kullanarak, aşağıdaki URL'ye GET sorgusu atacağız
@@ -67,6 +80,45 @@ async function ipAdresimiAl(){
 	Örnek dinamik URL kullanımı: var url = "https://apis.ergineer.com/ipgeoapi/"+benimIP; 
 */
 
-
-
 //kodlar buraya gelecek
+
+function ipGetir(obj) {
+  let cardDiv = document.createElement("div");
+  cardDiv.setAttribute("class", "card");
+  let imgSelect = document.createElement("img");
+  imgSelect.setAttribute("src", "url");
+  let cardInfoSelect = document.createElement("div");
+  cardInfoSelect.setAttribute("class", "card-info");
+  let ipSelect = document.createElement("h3");
+  ipSelect.setAttribute("class", "ip");
+  let ulkeSelect = document.createElement("p");
+  ulkeSelect.setAttribute("class", "ulke");
+
+  let p1 = document.createElement("p");
+  p1.textContent = "Enlem:" + "Boylam:";
+
+  let p2 = document.createElement("p");
+  p2.textContent = "Şehir:";
+
+  let p3 = document.createElement("p");
+  p3.textContent = "Saat Dilimi:";
+
+  let p4 = document.createElement("p");
+  p4.textContent = "Para Birimi:";
+
+  let p5 = document.createElement("p");
+  p5.textContent = "ISP:";
+
+  document.querySelector("body").appendChild(cardDiv);
+  cardDiv.appendChild(imgSelect);
+  document.querySelector(".card").appendChild(cardInfoSelect);
+  cardInfoSelect.appendChild(ipSelect);
+  cardInfoSelect.appendChild(ulkeSelect);
+  cardInfoSelect.appendChild(p1);
+  cardInfoSelect.appendChild(p2);
+  cardInfoSelect.appendChild(p3);
+  cardInfoSelect.appendChild(p4);
+  cardInfoSelect.appendChild(p5);
+}
+
+ipGetir();
