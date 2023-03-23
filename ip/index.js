@@ -79,7 +79,11 @@ function ipGetir(obj) {
   let cardDiv = document.createElement("div");
   cardDiv.setAttribute("class", "card");
   let imgSelect = document.createElement("img");
-  imgSelect.setAttribute("src", obj.ülkebayrağı);
+  //api'dan bayraklara ulaşılamadığı için TR için örnek img eklenmiştir
+  imgSelect.setAttribute(
+    "src",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Flag_of_Turkey.svg/330px-Flag_of_Turkey.svg.png"
+  );
   let cardInfoSelect = document.createElement("div");
   cardInfoSelect.setAttribute("class", "card-info");
   let ipSelect = document.createElement("h3");
@@ -116,17 +120,33 @@ function ipGetir(obj) {
   cardInfoSelect.appendChild(p5);
 }
 
-ipAdresimiAl();
+/*
+function cardYapici(datax) {
+  axios
+    .get(url)
+    .then((response) => {
+      ipGetir(datax);
+      console.log("başarılı", response);
+    })
+    .catch((err) => {
+      console.log("başarısız");
+    });
+}
+*/
 
-let url = "https://apis.ergineer.com/ipgeoapi/" + benimIP;
-
-axios
-  .get(url)
-  .then((response) => {
-    const dataObj = response.data;
-    ipGetir(dataObj);
-    console.log("başarılı", response);
-  })
-  .catch((err) => {
-    console.log("başarısız");
-  });
+async function setCardData() {
+  await ipAdresimiAl();
+  // IP adresimi biliyorum
+  axios
+    .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
+    .then(function (response) {
+      // handle success
+      console.log(response);
+      ipGetir(response.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+}
+setCardData();
