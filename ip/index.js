@@ -6,16 +6,7 @@ const axiosScript = document.createElement("script");
 axiosScript.setAttribute("src", "https://unpkg.com/axios/dist/axios.min.js");
 headSelect.appendChild(axiosScript);
 */
-/*
-axios
-  .get("https://apis.ergineer.com/ipgeoapi/<85.106.193.174>")
-  .then((response) => {
-    // get isteği başarılı oldu
-  })
-  .catch((err) => {
-    // get isteği başarısız oldu
-  });
-*/
+
 var benimIP;
 
 // ------------ değiştirmeyin --------------
@@ -34,6 +25,7 @@ async function ipAdresimiAl() {
       benimIP = a;
     });
 }
+
 // ------------ değiştirmeyin --------------
 
 /*
@@ -87,28 +79,30 @@ function ipGetir(obj) {
   let cardDiv = document.createElement("div");
   cardDiv.setAttribute("class", "card");
   let imgSelect = document.createElement("img");
-  imgSelect.setAttribute("src", "url");
+  imgSelect.setAttribute("src", obj.ülkebayrağı);
   let cardInfoSelect = document.createElement("div");
   cardInfoSelect.setAttribute("class", "card-info");
   let ipSelect = document.createElement("h3");
   ipSelect.setAttribute("class", "ip");
+  ipSelect.textContent = obj.sorgu;
   let ulkeSelect = document.createElement("p");
   ulkeSelect.setAttribute("class", "ulke");
+  ulkeSelect.textContent = obj.ülke + " " + obj.ülkeKodu;
 
   let p1 = document.createElement("p");
-  p1.textContent = "Enlem:" + "Boylam:";
+  p1.textContent = "Enlem: " + obj.enlem + " " + "Boylam: " + obj.boylam;
 
   let p2 = document.createElement("p");
-  p2.textContent = "Şehir:";
+  p2.textContent = "Şehir: " + obj.şehir;
 
   let p3 = document.createElement("p");
-  p3.textContent = "Saat Dilimi:";
+  p3.textContent = "Saat Dilimi: " + obj.saatdilimi;
 
   let p4 = document.createElement("p");
-  p4.textContent = "Para Birimi:";
+  p4.textContent = "Para Birimi: " + obj.parabirimi;
 
   let p5 = document.createElement("p");
-  p5.textContent = "ISP:";
+  p5.textContent = "ISP: " + obj.isp;
 
   document.querySelector("body").appendChild(cardDiv);
   cardDiv.appendChild(imgSelect);
@@ -122,4 +116,17 @@ function ipGetir(obj) {
   cardInfoSelect.appendChild(p5);
 }
 
-ipGetir();
+ipAdresimiAl();
+
+let url = "https://apis.ergineer.com/ipgeoapi/" + benimIP;
+
+axios
+  .get(url)
+  .then((response) => {
+    const dataObj = response.data;
+    ipGetir(dataObj);
+    console.log("başarılı", response);
+  })
+  .catch((err) => {
+    console.log("başarısız");
+  });
