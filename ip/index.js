@@ -1,11 +1,12 @@
 //axios import buraya gelecek
-
+import axios from "axios";
+/*
 const headSelect = document.querySelector("head");
-document.createElement("script");
-const scripSelect = document.querySelector("script");
-scripSelect.setAttribute("src", "https://unpkg.com/axios/dist/axios.min.js");
-headSelect.appendChild(scripSelect);
-
+const axiosScript = document.createElement("script");
+axiosScript.setAttribute("src", "https://unpkg.com/axios/dist/axios.min.js");
+headSelect.appendChild(axiosScript);
+*/
+/*
 axios
   .get("https://apis.ergineer.com/ipgeoapi/<85.106.193.174>")
   .then((response) => {
@@ -14,7 +15,7 @@ axios
   .catch((err) => {
     // get isteği başarısız oldu
   });
-
+*/
 var benimIP;
 
 // ------------ değiştirmeyin --------------
